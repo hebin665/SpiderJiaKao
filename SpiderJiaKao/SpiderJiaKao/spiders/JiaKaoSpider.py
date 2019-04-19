@@ -12,9 +12,9 @@ class JiakaospiderSpider(scrapy.Spider):
     name = 'JiaKaoSpider'
     allowed_domains = ['www.ybjk.com']
     start_urls = ['https://www.ybjk.com/tiku/kmy-1501.htm',
-                  # 'https://www.ybjk.com/tiku/kmy-1502.htm',
-                  # 'https://www.ybjk.com/tiku/kmy-1503.htm',
-                  # 'https://www.ybjk.com/tiku/kmy-1504.htm'
+                  'https://www.ybjk.com/tiku/kmy-1502.htm',
+                  'https://www.ybjk.com/tiku/kmy-1503.htm',
+                  'https://www.ybjk.com/tiku/kmy-1504.htm'
                   ]#科一
     # start_urls = ['http://www.ybjk.com/tiku/kms-1511.htm',
     #               'http://www.ybjk.com/tiku/kms-1512.htm',
@@ -76,30 +76,30 @@ class JiakaospiderSpider(scrapy.Spider):
             # print(img_url)
             # print(answer)
             #
-            # jiaItem = JiaKaoItem()
-            # jiaItem['optiona'] = option_a
-            # jiaItem['optionb'] = option_b
-            # jiaItem['optionc'] = option_c
-            # jiaItem['optiond'] = option_d
-            # jiaItem['subject'] = question
-            # jiaItem['taotiid'] = taotiid
-            # jiaItem['createtime'] = createtime
-            #
-            # jiaItem['image_url'] = img_url
-            # jiaItem['answer'] = answer
-            # jiaItem['type'] = type
-            # yield jiaItem
+            jiaItem = JiaKaoItem()
+            jiaItem['optiona'] = option_a
+            jiaItem['optionb'] = option_b
+            jiaItem['optionc'] = option_c
+            jiaItem['optiond'] = option_d
+            jiaItem['subject'] = question
+            jiaItem['taotiid'] = taotiid
+            jiaItem['createtime'] = createtime
 
-        # nextUrl_list = response.css(".mainBox.tikuBox .list .PageL a").extract()
-        # nextUrl_list = ",".join(nextUrl_list)
-        # print(nextUrl_list)
-        # try:
-        #     nextUrl = re.match('.*<a href="(.*?)">下页</a>', nextUrl_list).group(1)
-        # except:
-        #     nextUrl = ''
-        # print(nextUrl)
-        # if nextUrl:
-        #     yield Request(url=parse.urljoin(response.url, nextUrl), callback=self.parse)
+            jiaItem['image_url'] = img_url
+            jiaItem['answer'] = answer
+            jiaItem['type'] = type
+            yield jiaItem
+
+        nextUrl_list = response.css(".mainBox.tikuBox .list .PageL a").extract()
+        nextUrl_list = ",".join(nextUrl_list)
+        print(nextUrl_list)
+        try:
+            nextUrl = re.match('.*<a href="(.*?)">下页</a>', nextUrl_list).group(1)
+        except:
+            nextUrl = ''
+        print(nextUrl)
+        if nextUrl:
+            yield Request(url=parse.urljoin(response.url, nextUrl), callback=self.parse)
         pass
 
 

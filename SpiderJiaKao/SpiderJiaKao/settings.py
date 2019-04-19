@@ -65,8 +65,8 @@ ROBOTSTXT_OBEY = False
 # Configure item pipelines
 # See https://doc.scrapy.org/en/latest/topics/item-pipeline.html
 ITEM_PIPELINES = {
-   # 'SpiderJiaKao.pipelines.MySqlTwistedPipline': 300,
-   'SpiderJiaKao.pipelines.SpiderjiakaoPipeline': 100,
+   'SpiderJiaKao.pipelines.MySqlTwistedPipline': 300,
+   # 'SpiderJiaKao.pipelines.SpiderjiakaoPipeline': 100,
 
 
 }
